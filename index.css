@@ -1,0 +1,428 @@
+/* rscss */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    width: 90%;
+    /* max-width ~ chiều ngang tối đa */
+    max-width: 1200px;
+    margin: 0 auto;
+
+    /* trên dưới 0, trái phải auto; đưa nội dung vô giữa */
+}
+
+/* start header */
+header {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+/* 
+flex ~ thẻ cha di chuyển thẻ con
+mặc định trục chính là chiều ngang
+
+trục chính ~ justify-content
+
+trục phụ ~ align-items
+
+*/
+
+header .container {
+    height: 80px;
+    /* border: 2px solid red; */
+    color: white;
+    display: flex;
+    /* đưa thẻ con lên trục chính đứng */
+
+    /* thay đổi chiều trục chính */
+    /* flex-direction: column; */
+    justify-content: space-between;
+    align-items: center;
+}
+
+header a {
+    color: white;
+    font-size: 20px;
+    margin-left: 20px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+/* a.active ~ gọi tới thẻ a có class active */
+header a:hover,
+header a.active {
+    color: #e62b4a;
+}
+
+header .logo {
+    font-size: 26px;
+    text-transform: lowercase;
+    font-weight: 500;
+}
+
+/* start banner */
+.banner {
+    /* trừ ra 80px của header */
+    padding-top: 80px;
+    background-image: url(./image/home_slider.jpg);
+    /* background-attachment: fixed; ~ giữ ảnh banner đứng yên */
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    /* vh ~ viewheight ~ chiều cao màn hình */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+
+.banner * {
+    margin: 20px 0;
+    color: white;
+}
+
+.banner h3 {
+    font-size: 24px;
+}
+
+.banner h2 {
+    font-size: 70px;
+    /* font-weight: 500; */
+}
+
+.banner button {
+    background-color: #e62b4a;
+    border: none;
+    padding: 15px 25px;
+    text-transform: uppercase;
+    /* thay đổi hình dạng con trỏ chuột */
+    cursor: pointer;
+    /* transition ~ cảm nhận sự thay đổi từ đỏ sang đỏ đậm */
+    transition: 0.3s;
+}
+
+/* khi user rê chuột lên thẻ button => trạng thái hover */
+.banner button:hover {
+    background-color: #7c1526;
+}
+
+.banner i {
+    font-size: 50px;
+    /* animation-name: animate-arrow;
+    animation-duration: 1s;
+    animation-iteration-count: infinite; */
+    animation: animate-arrow 1s infinite;
+}
+
+/* khai báo tạo animate với tên animate-arrow */
+@keyframes animate-arrow {
+
+    /* bắt đầu animate */
+    from {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+
+    /* kết thúc animate */
+    to {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+}
+
+/* start carousel */
+.carousel {
+    background-color: black;
+    color: white;
+    padding: 80px 0px;
+    text-align: center;
+}
+
+/* gọi ra tất cả thẻ con nằm trong carousel__title */
+.carousel__title * {
+    margin-bottom: 20px;
+}
+
+.carousel__title h2 {
+    font-size: 40px;
+}
+
+.carousel__item {
+    padding: 0px 10px;
+}
+
+.carousel__item .item__container {
+    background-color: white;
+    height: 200px;
+    color: black;
+    /* di chuyển thẻ con vào giữa thẻ cha */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+}
+
+.carousel__item i {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.carousel__item .item__container::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    background-color: #e62b4a;
+    transition: 0.3s;
+    transform: translateY(-100%);
+    /* translate 100% theo bản thân thẻ */
+}
+
+.carousel__item:hover .item__container::before {
+    /* height: 100%; */
+    transform: translateY(0%);
+
+}
+
+.slick-dots li button:before {
+    color: white;
+    font-size: 15px;
+    opacity: 1;
+}
+
+.slick-dots li.slick-active button:before {
+    opacity: 1;
+    color: #e62b4a;
+}
+
+.slick-dots {
+    bottom: -50px;
+}
+
+/* start blogs */
+.blogs {
+    padding: 80px 0;
+}
+
+.blogs__title {
+    text-align: center;
+}
+
+.blogs__title * {
+    margin-bottom: 20px;
+}
+
+.blogs__title h2 {
+    font-size: 40px;
+}
+
+/* grid system */
+.blogs__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /* khoảng cách giữa các thẻ con */
+    gap: 20px;
+}
+
+.blogs__item {
+    position: relative;
+}
+
+.blogs__overlay {
+    position: absolute;
+    background-color: rgb(230, 43, 74, 0.6);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.blogs__item:hover .blogs__overlay {
+    opacity: 1;
+}
+
+.blog__search {
+    position: absolute;
+    top: 40px;
+    right: 20px;
+    transition: 0.3s;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blogs__item:hover .blog__search {
+    top: 20px;
+}
+
+.blog__logo {
+    position: absolute;
+    left: 20px;
+    bottom: 0px;
+    transition: 0.3s;
+    color: white;
+}
+
+.blogs__item:hover .blog__logo {
+    bottom: 20px;
+}
+
+.blogs__item img {
+    width: 100%;
+    height: 100%;
+    filter: grayscale(50%) contrast(50%);
+    object-fit: cover;
+}
+
+/* gọi tới 1 thẻ có 2 class */
+.blogs__item.item--1 {
+    /* vị trí bất đầu / vị trí kết thúc */
+    grid-column: 1 / 3;
+    grid-row: 1 / 3;
+}
+
+.blogs__item.item--10 {
+    grid-column: 3 / 5;
+    grid-row: 3 /5;
+}
+
+/* start .numbers */
+.numbers {
+    padding: 80px 0px;
+    background-color: black;
+    color: white;
+}
+
+.numbers .container {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.numbers h2 {
+    font-size: 60px;
+    font-weight: 300;
+}
+
+/* start experience */
+.experience {
+    padding: 80px 0px;
+    background-image: url(./image/bussiness_img_1.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.experience__title {
+    text-align: center;
+}
+
+.experience__title p {
+    font-size: 14px;
+    color: #e62b4a;
+    font-weight: 300;
+}
+
+.experience__title h2 {
+    font-size: 50px;
+    color: white;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.experience__title h4 {
+    font-size: 14px;
+    color: gray;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.experience__video {
+    margin-top: 20px;
+}
+
+.experience__video video{
+    object-fit: cover;
+    width: 100%;
+}
+
+/* start contact */
+.contact {
+    padding: 80px 0px;
+}
+
+.contact__title {
+    text-align: center;
+}
+
+.contact__title h2 { 
+    font-size: 40px;
+}
+
+.contact__title * {
+    margin-bottom: 20px;
+}
+
+.contact__content {
+    display: flex;
+}
+
+.contact__content form,
+.contact__content iframe {
+    width: 50%;
+    height: 450px;
+}
+
+.contact__content form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 20px;
+}
+
+.contact__content form * {
+    padding: 20px;
+    border-radius: 2px;
+    border: 1px solid gray;
+    margin-bottom: 20px;
+}
+
+.contact__content button {
+    font-size: 18px;
+    background: black;
+    color: white;
+    border: none;
+    transition: 0.4s;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.contact__content button:hover {
+    background: #e62b4a;
+}
+
+.contact__content input:focus {
+    outline: 2px solid black;
+}
+
+.contact__content textarea {
+    resize: none;
+    flex-grow: 1;
+}
